@@ -1,0 +1,12 @@
+node_modules
+dist
+backend
+.git
+.gitignore
+**/__pycache__
+**/*.pyc
+.venv
+venv
+.env
+*.md
+agent-transcripts

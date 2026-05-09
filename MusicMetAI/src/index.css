@@ -1,0 +1,228 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-highlight: var(--highlight);
+}
+:root {
+  --text: #eaf2ff;
+  --text-h: #ffffff;
+  --bg: #061a40;
+  --border: #3a6db3;
+  --code-bg: #0f2e63;
+  --accent: #4da3ff;
+  --accent-bg: rgba(77, 163, 255, 0.18);
+  --accent-border: rgba(77, 163, 255, 0.55);
+  --social-bg: rgba(15, 46, 99, 0.45);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  /* Swiss-type stack: Helvetica-like, avoid rounded UI / phone-style faces */
+  --sans:
+    'Helvetica Neue', Helvetica, Arial, 'Liberation Sans', sans-serif;
+  --heading: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+  /* Open dotted display (Nothing Phone uses proprietary NDot; Doto matches the vibe legally) */
+  --font-brand-dot:
+    'Doto', ui-monospace, monospace;
+  --font-display-light:
+    'Fraunces', Georgia, 'Times New Roman', serif;
+  --background: #061a40;
+  --foreground: #ffffff;
+  --card: #0d2b5b;
+  --muted-foreground: #bdd6ff;
+  --accent: #4da3ff;
+  --accent-foreground: #03112a;
+  --ink: #ffffff;
+  --paper: #0f2e63;
+  --highlight: #2c5ea8;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #eaf2ff;
+    --text-h: #ffffff;
+    --bg: #061a40;
+    --border: #3a6db3;
+    --code-bg: #0f2e63;
+    --accent: #4da3ff;
+    --accent-bg: rgba(77, 163, 255, 0.18);
+    --accent-border: rgba(77, 163, 255, 0.55);
+    --social-bg: rgba(15, 46, 99, 0.45);
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+
+  #social .button-icon {
+    filter: invert(1) brightness(2);
+  }
+}
+
+#root {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  text-align: left;
+  border: none;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:
+    Inter,
+    var(--sans);
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+p {
+  margin: 0;
+}
+
+.font-brand-dot {
+  font-family: var(--font-brand-dot);
+}
+
+.font-display-light {
+  font-family: var(--font-display-light);
+  font-optical-sizing: auto;
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+
+.bubble-layer {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  background:
+    radial-gradient(1200px 600px at 15% -10%, rgba(120, 210, 255, 0.2), transparent 70%),
+    radial-gradient(1000px 550px at 100% 0%, rgba(40, 130, 220, 0.2), transparent 72%),
+    linear-gradient(180deg, #0a2f66 0%, #0a2452 32%, #081a3a 64%, #06142e 100%);
+}
+
+.bubble-layer::before,
+.bubble-layer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.bubble-layer::before {
+  background:
+    repeating-linear-gradient(
+      104deg,
+      rgba(170, 230, 255, 0.06) 0px,
+      rgba(170, 230, 255, 0.06) 16px,
+      transparent 16px,
+      transparent 46px
+    );
+  mix-blend-mode: screen;
+  opacity: 0.45;
+  animation: drift-caustics 22s linear infinite;
+}
+
+.bubble-layer::after {
+  background: linear-gradient(180deg, rgba(5, 18, 42, 0) 0%, rgba(5, 18, 42, 0.45) 80%, rgba(5, 18, 42, 0.7) 100%);
+}
+
+.bubble {
+  position: absolute;
+  bottom: -80px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 30% 30%, rgba(235, 250, 255, 0.5), rgba(140, 215, 255, 0.15));
+  border: 1px solid rgba(215, 245, 255, 0.35);
+  animation-name: float-bubble;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  box-shadow: 0 0 18px rgba(140, 215, 255, 0.25);
+}
+
+.b1 { left: 8%; width: 18px; height: 18px; animation-duration: 24s; animation-delay: -2s; }
+.b2 { left: 20%; width: 12px; height: 12px; animation-duration: 20s; animation-delay: -9s; }
+.b3 { left: 38%; width: 26px; height: 26px; animation-duration: 28s; animation-delay: -5s; }
+.b4 { left: 55%; width: 14px; height: 14px; animation-duration: 22s; animation-delay: -11s; }
+.b5 { left: 72%; width: 20px; height: 20px; animation-duration: 26s; animation-delay: -6s; }
+.b6 { left: 88%; width: 10px; height: 10px; animation-duration: 19s; animation-delay: -3s; }
+
+@keyframes float-bubble {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-110vh) translateX(28px);
+    opacity: 0;
+  }
+}
+
+@keyframes drift-caustics {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(-30px, 18px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
